@@ -1,0 +1,61 @@
+@startuml game_application
+package com.gamingroom {
+
+    ' GameService class with singleton pattern
+    class GameService {
+        - games: List<Game>
+        - nextGameId: long
+        - instance: GameService
+        + getInstance(): GameService
+        + addGame(name: String): Game
+        + getGame(index: int): Game
+        + getGame(id: long): Game
+        + getGame(name: String): Game
+        + getGameCount(): int
+    }
+
+    ' Game class
+    class Game {
+        - id: long
+        - name: String
+        + getId(): long
+        + getName(): String
+        + toString(): String
+    }
+
+    ' Player class
+    class Player {
+        - id: long
+        - name: String
+        + getId(): long
+        + getName(): String
+        + toString(): String
+    }
+
+    ' Team class
+    class Team {
+        - id: long
+        - name: String
+        + getId(): long
+        + getName(): String
+        + toString(): String
+    }
+
+    ' ProgramDriver class
+    class ProgramDriver {
+        + main(args: String[]): void
+    }
+
+    ' SingletonTester class
+    class SingletonTester {
+        + testSingleton(): void
+    }
+
+    ' Relationships
+    ProgramDriver ..> GameService : << uses >>
+    SingletonTester ..> GameService : << uses >>
+    GameService "1" --> "0..*" Game
+    Game "1" --> "0..*" Player
+    Game "1" --> "0..*" Team
+}
+@enduml
